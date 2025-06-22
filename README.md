@@ -47,16 +47,40 @@ cpfcnpj-validator/
 - Interface de linha de comando para validação de CPF e CNPJ
 - Dockerfile multi-stage leve
 - Estrutura modular e organizada para evoluir facilmente
+- Validação real com dígitos verificadores
 
 ---
 
 ## 💡 Possíveis melhorias
 
-- Validação completa com dígitos verificadores
 - Testes unitários com `go test`
 - Exportar como biblioteca Go para reuso em outros projetos
 - API REST para validação via HTTP
 - Upload e validação em lote (CSV)
+
+---
+
+## 📦 Como usar como biblioteca
+
+Você pode importar diretamente no seu projeto Go:
+
+```go
+import "github.com/mvcbotelho/cpfcnpj-validator/validator"
+
+func main() {
+    if validator.IsValidCPF("12345678909") {
+        fmt.Println("CPF válido")
+    }
+}
+```
+
+### Testar localmente:
+
+Adicione no `go.mod` do seu projeto:
+
+```
+replace github.com/mvcbotelho/cpfcnpj-validator => ../cpfcnpj-validator
+```
 
 ---
 
@@ -68,7 +92,7 @@ Sinta-se livre para abrir issues, sugerir melhorias ou enviar PRs!
 
 ## 🧠 Autor
 
-**Marcus Botelho**  
+**Marcus Botelho** 
 
 ---
 
