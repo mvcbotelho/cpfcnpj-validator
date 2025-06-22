@@ -1,6 +1,7 @@
 package validator
 
 import (
+	"fmt"
 	"strings"
 	"unicode"
 )
@@ -48,5 +49,5 @@ func calculateDigit(base string, weight int) string {
 	if d >= 10 {
 		return "0"
 	}
-	return string('0' + d)
+	return fmt.Sprintf("%d", d)
 }

@@ -1,6 +1,7 @@
 package validator
 
 import (
+	"fmt"
 	"strings"
 	"unicode"
 )
@@ -42,5 +43,5 @@ func calculateCNPJDigit(base string) string {
 	if d >= 10 {
 		return "0"
 	}
-	return string('0' + d)
+	return fmt.Sprintf("%d", d)
 }

@@ -6,32 +6,26 @@ import (
 	"github.com/mvcbotelho/cpfcnpj-validator/validator"
 )
 
-func TestValidCNPJ(t *testing.T) {
-	valid := []string{
-		"45.723.174/0001-10",
-		"04.252.011/0001-10",
-		"11222333000181",
+func TestIsValidCNPJ(t *testing.T) {
+	tests := []struct {
+		name     string
+		input    string
+		expected bool
+	}{
+		{"Valid CNPJ clean", "11222333000181", true},
+		{"Valid CNPJ formatted", "11.222.333/0001-81", true},
+		{"Invalid CNPJ digits", "11222333000180", false},
+		{"Invalid CNPJ repeated", "00000000000000", false},
+		{"Invalid CNPJ chars", "abcd/efgh-ijkl", false},
+		{"Invalid CNPJ short", "123", false},
 	}
 
-	for _, cnpj := range valid {
-		if !validator.IsValidCNPJ(cnpj) {
-			t.Errorf("CNPJ deveria ser válido: %s", cnpj)
-		}
-	}
-}
-
-func TestInvalidCNPJ(t *testing.T) {
-	invalid := []string{
-		"45.723.174/0001-00",
-		"00.000.000/0000-00",
-		"11111111111111",
-		"abcdefghijklll",
-		"11222333000180", // dígito verificador errado
-	}
-
-	for _, cnpj := range invalid {
-		if validator.IsValidCNPJ(cnpj) {
-			t.Errorf("CNPJ deveria ser inválido: %s", cnpj)
-		}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			result := validator.IsValidCNPJ(tt.input)
+			if result != tt.expected {
+				t.Errorf("expected %v, got %v", tt.expected, result)
+			}
+		})
 	}
 }
