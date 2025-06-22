@@ -11,10 +11,15 @@ RUN go build -o /app/bin/validator main.go
 
 FROM alpine:latest
 
-WORKDIR /root/
+# Cria usuário não-root
+RUN adduser -D appuser
 
-COPY --from=builder /app/bin/validator .
+WORKDIR /home/appuser
 
-RUN chmod +x ./validator
+COPY --from=builder /app/bin/validator /usr/local/bin/validator
 
-ENTRYPOINT ["./validator"]
+USER appuser
+
+HEALTHCHECK --interval=30s --timeout=3s CMD ["/usr/local/bin/validator", "--cpf", "11111111111"]
+
+ENTRYPOINT ["/usr/local/bin/validator"]

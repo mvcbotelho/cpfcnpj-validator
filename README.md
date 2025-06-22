@@ -4,24 +4,58 @@ Este projeto é uma ferramenta simples e eficiente para validação de CPF e CNP
 
 ---
 
-## 🚀 Como executar com Docker
+## 🚀 Como executar
 
-### 1. Build da imagem:
+### Com Docker
+
+1. **Build da imagem:**
 
 ```bash
-docker build -t cpfcnpj-validator .
+make docker-build
 ```
 
-### 2. Rodar com CPF:
+2. **Rodar validação de CPF:**
 
 ```bash
-docker run --rm cpfcnpj-validator --cpf 12345678909
+make docker-run-cpf
 ```
 
-### 3. Rodar com CNPJ:
+3. **Rodar validação de CNPJ:**
 
 ```bash
-docker run --rm cpfcnpj-validator --cnpj 12345678000195
+make docker-run-cnpj
+```
+
+4. **Rodar testes na imagem Docker:**
+
+```bash
+make docker-test
+```
+
+### Localmente (sem Docker)
+
+1. **Rodar validação de CPF:**
+
+```bash
+make run-local
+```
+
+2. **Rodar testes:**
+
+```bash
+make test-local
+```
+
+3. **Lint do código (requer golangci-lint):**
+
+```bash
+make lint
+```
+
+4. **Formatar código:**
+
+```bash
+make format
 ```
 
 ---
@@ -35,7 +69,11 @@ cpfcnpj-validator/
 │   ├── cpf.go
 │   ├── cnpj.go
 │   └── utils.go
+├── validator_test/
+│   ├── cpf_test.go
+│   └── cnpj_test.go
 ├── Dockerfile
+├── Makefile
 ├── go.mod
 └── README.md
 ```
@@ -45,11 +83,13 @@ cpfcnpj-validator/
 ## ✅ O que já funciona
 
 - Interface de linha de comando para validação de CPF e CNPJ
-- Dockerfile multi-stage leve
+- Dockerfile multi-stage seguro, rodando como usuário não-root e com HEALTHCHECK
 - Estrutura modular e organizada para evoluir facilmente
+- Funções utilitárias para limpeza, repetição e cálculo de dígitos
 - Validação real com dígitos verificadores
 - Testes unitários com `go test`
 - Exportar como biblioteca Go para reuso em outros projetos
+- Makefile completo com targets para build, run, test, lint e format
 
 ---
 
@@ -84,6 +124,16 @@ replace github.com/mvcbotelho/cpfcnpj-validator => ../cpfcnpj-validator
 
 ---
 
+## 🆕 Melhorias recentes
+
+- Refatoração: código duplicado removido, funções utilitárias criadas em `utils.go`
+- Dockerfile mais seguro: multi-stage, usuário não-root, HEALTHCHECK
+- Makefile expandido: targets para build, run, test, lint, format, local e Docker
+- Testes organizados em `validator_test/`
+- Validação aprimorada para CPF e CNPJ
+
+---
+
 ## 🤝 Contribuindo
 
 Sinta-se livre para abrir issues, sugerir melhorias ou enviar PRs!
@@ -93,6 +143,9 @@ Sinta-se livre para abrir issues, sugerir melhorias ou enviar PRs!
 ## 🧠 Autor
 
 **Marcus Botelho** 
+
+- GitHub: [@mvcbotelho](https://github.com/mvcbotelho)
+- LinkedIn: [@mvcbotelho](https://linkedin.com/in/mvcbotelho)
 
 ---
 
