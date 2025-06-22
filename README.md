@@ -48,13 +48,13 @@ cpfcnpj-validator/
 - Dockerfile multi-stage leve
 - Estrutura modular e organizada para evoluir facilmente
 - Validação real com dígitos verificadores
+- Testes unitários com `go test`
+- Exportar como biblioteca Go para reuso em outros projetos
 
 ---
 
 ## 💡 Possíveis melhorias
 
-- Testes unitários com `go test`
-- Exportar como biblioteca Go para reuso em outros projetos
 - API REST para validação via HTTP
 - Upload e validação em lote (CSV)
 
